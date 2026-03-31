@@ -90,7 +90,7 @@ cd animal-metrology
 cp .env.example .env
 ```
 
-根據需求修改`.env`內的環境變數設定，可使用機器上支援的任何編輯器，以vim與nano為例：
+根據需求修改`.env`內的環境變數設定，可使用機器上支援的任何編輯器進行修改，以vim與nano為例：
 - vim:
 ```bash
 vim .env
@@ -108,13 +108,13 @@ docker compose up -d
 
 ### 二、開始使用
 
-1. 下載 COCO Dataset
+1. 下載COCO資料集
 
 ```bash
 docker exec animal-metrology python3 download_dataset.py
 ```
 
-下載後的dataset存放在`data/coco/`資料夾。  
+下載後的資料集存放在`data/coco/`資料夾。  
 
 
 2. 篩選符合條件的圖片（≥2 隻動物的圖片）並匯出結果
@@ -217,7 +217,7 @@ d = sqrt((x2 - x1)^2 + (y2 - y1)^2)
 IoU = Area of Overlap / Area of Union
 ```
 
-由於COCO dataset中包含人工標記的segmentation資訊，因此使用此資訊作為正確答案，並使用模型推論後得到的segmentation資訊作為預測結果，接著使用正確答案與預測結果計算IoU，來評估segmentation的準確度。
+由於COCO資料集中包含人工標記的segmentation資訊，因此使用此資訊作為正確答案，並使用模型推論後得到的segmentation資訊作為預測結果，接著使用正確答案與預測結果計算IoU，來評估segmentation的準確度。
 
 ### 2.動物眼睛偵測（Eye Detection）
 在此專案中，由於選擇的YOLO pose estimation模型主要是針對人體關鍵點進行訓練，因此標記資料中並沒有動物（排除人類）的關鍵點標記資料，導致無法計算偵測準確度。
