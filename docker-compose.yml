@@ -1,0 +1,36 @@
+
+services:
+  animal-metrology:
+    container_name: animal-metrology
+    build:
+        context: ./build/
+        dockerfile: dockerfile
+    image: animal-metrology:cuda-12.2.0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+        TZ: "Asia/Taipei"
+        LANG: C.UTF-8
+        APP_ENV: ${APP_ENV}
+        DATA_DIR: ${DATA_DIR}
+        COCO_DIR: ${COCO_DIR}
+        COCO_IMAGE_DOWNLOAD_URL: ${COCO_IMAGE_DOWNLOAD_URL}
+        COCO_ANNOTATION_DOWNLOAD_URL: ${COCO_ANNOTATION_DOWNLOAD_URL}
+        OUTPUT_DIR: ${OUTPUT_DIR}
+        FILTERED_IMAGE_DIR: ${FILTERED_IMAGE_DIR}
+        RESULT_DIR: ${RESULT_DIR}
+        ULTRALYTICS_HOME: ${ULTRALYTICS_HOME}
+        SEG_MODEL_FILE: ${SEG_MODEL_FILE}
+        POS_MODEL_FILE: ${POS_MODEL_FILE}
+        DEVICE: ${DEVICE}
+        CONF: ${CONF}
+        IMGSZ: ${IMGSZ}
+    volumes:
+      - ./data:/data
+      - ./model:/model
+      - ./src:/app

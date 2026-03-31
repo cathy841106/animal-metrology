@@ -1,0 +1,28 @@
+FROM python:3.10
+
+# Set work directory
+WORKDIR /app
+
+# Install system dependencies and Python-related packages
+RUN apt-get update && apt-get install -y \
+    python3-pip \
+    python3-dev \
+    libglib2.0-0 \
+    libgl1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements.txt files into the container
+COPY requirements.txt ./requirements.txt
+
+# Install PyTorch with CUDA support
+RUN pip3 install \
+    torch==2.1.2+cu121 \
+    torchvision==0.16.2+cu121 \
+    torchaudio==2.1.2+cu121 \
+    --extra-index-url https://download.pytorch.org/whl/cu121
+
+# Install Python dependencies from requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
+
+# Keep the container running
+ENTRYPOINT ["tail", "-f", "/dev/null"]
