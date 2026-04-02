@@ -25,6 +25,6 @@ class Config:
     POS_MODEL_PATH = os.path.join(ULTRALYTICS_HOME, os.getenv("POS_MODEL_FILE"))
     
     # ==== YOLO ====
-    DEVICE = os.getenv("DEVICE", None)
+    DEVICE = os.getenv("DEVICE")
     CONF = float(os.getenv("CONF", 0.25))
     IMGSZ = int(os.getenv("IMGSZ", 640))
